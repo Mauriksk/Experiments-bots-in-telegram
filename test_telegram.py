@@ -1,4 +1,4 @@
-from config import *
+from config.config import *
 import telebot
 import threading
 

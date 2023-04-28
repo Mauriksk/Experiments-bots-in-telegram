@@ -11,7 +11,7 @@ users = {}
 @bot.message_handler(commands=['start', 'help'])
 def cmd_start(message):
     markup = ReplyKeyboardRemove()
-    bot.send_message(message.chat.id, "How is your name?", reply_markup=markup)
+    bot.send_message(message.chat.id, "Use the comman /replay", reply_markup=markup)
 
 @bot.message_handler(commands=['replay'])
 def replay_message(message):

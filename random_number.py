@@ -24,3 +24,26 @@ def cmd_play(message):
 
 def check_number(message):
     cid = message.chat.id 
+    if not message.text.isdigit():
+        msg = bot.send_message(cid, "ERROR: Put a valid number")
+        bot.register_next_step_handler(msg, check_number)
+    else: 
+        n = int(message.text)
+        if n < 1 or n > 10:
+            msg = bot.send_message(cid, "ERROR: Put a valid number")
+            bot.register_next_step_handler(msg, check_number)
+        else:
+            if n == users[cid]:
+                markup = ReplyKeyboardRemove()
+                msg = bot.reply_to(message, "Good you choose the right number!!", reply_markup=markup)
+                return
+            elif n > users[cid]:
+                msg = bot.reply_to(message, "Clue: is a lower number")
+                bot.register_next_step_handler(msg, check_number)
+            else: 
+                msg = bot.reply_to(message, "Clue: is a higher number")
+                bot.register_next_step_handler(msg, check_number)
+
+
+if __name__ == '__main__':
+    bot.infinity_polling()
